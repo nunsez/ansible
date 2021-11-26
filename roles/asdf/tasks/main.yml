@@ -1,0 +1,12 @@
+---
+- name: add asdf to zsh
+  include_role:
+    name: markosamuli.asdf
+  vars:
+    asdf_init_shell: true
+
+- name: install asdf plugins
+  include_role:
+    name: markosamuli.asdf
+  vars:
+    asdf_plugins: "{{ asdf_plugs }}"

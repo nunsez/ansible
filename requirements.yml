@@ -1,0 +1,7 @@
+# Roles and collections can be found on https://galaxy.ansible.com/
+---
+roles:
+  - name: markosamuli.asdf
+
+collections:
+  - community.general

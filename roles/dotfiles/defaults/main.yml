@@ -1,0 +1,12 @@
+---
+ansible_user: root
+
+git_user_email: mad.nunsez@gmail.com
+git_user_name: Alexander Mandrikov
+git_defaultbranch: master
+
+zsh_theme: robbyrussell
+zsh_users:
+  - "{{ ansible_user }}"
+zsh_plugins_default:
+  - git

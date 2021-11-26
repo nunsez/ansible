@@ -1,0 +1,7 @@
+---
+- name: Install packages
+  become: "{{ ansible_distribution != 'MacOSX' }}"
+  package:
+    update_cache: yes
+    state: latest
+    name: "{{ install_packages }}"

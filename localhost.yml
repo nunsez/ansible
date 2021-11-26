@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  roles:
+    # - install_tools
+    - dotfiles
+    # - asdf

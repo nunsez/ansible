@@ -1,0 +1,35 @@
+---
+- name: Set global user.email
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: "{{ git_user_email }}"
+
+- name: Set global user.name
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: "{{ git_user_name }}"
+
+- name: Set global init.defaultbranch
+  community.general.git_config:
+    name: init.defaultbranch
+    scope: global
+    value: "{{ git_defaultbranch }}"
+
+# - name: Set vim as editor
+#   community.general.git_config:
+#     name: core.editor
+#     scope: global
+#     value: vim
+
+# - name: Copy git global ignore file
+#   ansible.builtin.copy:
+#     src: files/gitignore_global
+#     dest: "~/.gitignore_global"
+
+# - name: Set global gitignore
+#   community.general.git_config:
+#     name: core.excludesFile
+#     scope: global
+#     value: ~/.gitignore_global
