@@ -1,19 +1,15 @@
 ---
-_oh_my_zsh_dependencies:
-  - git
-  - zsh
-
-zsh_plugins_custom:
-  - name: zsh-completions
-    src: https://github.com/zsh-users/zsh-completions.git
-  - name: zsh-autosuggestions
-    src: https://github.com/zsh-users/zsh-autosuggestions.git
-  - name: fast-syntax-highlighting
-    src: https://github.com/zdharma-continuum/fast-syntax-highlighting.git
-  - name: zsh-history-substring-search
-    src: https://github.com/zsh-users/zsh-history-substring-search.git
-
-zsh_dotfiles:
+dotfiles:
   - .zshenv
   - .zprofile
   - .dir_colors
+
+zsh_plugins_custom:
+  zsh-completions:
+    src: https://github.com/zsh-users/zsh-completions.git
+  zsh-autosuggestions:
+    src: https://github.com/zsh-users/zsh-autosuggestions.git
+  fast-syntax-highlighting:
+    src: https://github.com/zdharma-continuum/fast-syntax-highlighting.git
+  zsh-history-substring-search:
+    src: https://github.com/zsh-users/zsh-history-substring-search.git

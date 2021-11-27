@@ -1,5 +1,5 @@
 ---
-ansible_user: root
+ansible_user: alex
 
 git_user_email: mad.nunsez@gmail.com
 git_user_name: Alexander Mandrikov

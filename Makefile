@@ -13,9 +13,11 @@ decrypt:
 test:
 	ansible-playbook test.yml -i localhost, -e ansible_connection=local --vault-password-file=.password
 
-main: install-requirements
-	ansible-playbook localhost.yml -i inventory.ini --vault-password-file=.password
+local: install-requirements
+	ansible-playbook playbook.yml -i inventory.ini --limit localhost --vault-password-file=.password
 
+servers:
+	ansible-playbook playbook.yml -i inventory.ini --limit servers --vault-password-file=.password
 
 %:
 	@:

@@ -1,0 +1,5 @@
+---
+ansible_become_pass: "{{ vault_ansible_become_pass }}"
+
+zsh_users:
+  - alex

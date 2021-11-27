@@ -1,7 +1,0 @@
----
-- name: Install dependencies for Oh-My-Zsh
-  become: "{{ ansible_distribution != 'MacOSX' }}"
-  package:
-    update_cache: "{{ ansible_distribution != 'MacOSX' }}"
-    state: latest
-    name: "{{ _oh_my_zsh_dependencies }}"

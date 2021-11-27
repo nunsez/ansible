@@ -1,66 +1,28 @@
 ---
+- name: Install dependencies for Oh-My-Zsh
+  become: "{{ ansible_distribution != 'MacOSX' }}"
+  package:
+    update_cache: "{{ ansible_distribution != 'MacOSX' }}"
+    state: latest
+    name:
+      - git
+      - zsh
+
 - name: Get local users
   getent:
     database: passwd
     split: ":"
 
-- name: Prepare local_users
+- name: Prepare local users
   set_fact:
     local_users: "{{ getent_passwd | list }}"
 
-- name: Download Oh-My-Zsh framework for zsh_users
-  become: yes
-  become_user: "{{ item }}"
-  git:
-    repo: https://github.com/ohmyzsh/ohmyzsh
-    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
-  when: item in local_users
-  with_items: "{{ zsh_users }}"
-
-- name: Download zsh plugins for zsh_users
-  vars:
-    default_custom: "{{ ansible_env.HOME }}/.oh-my-zsh/custom"
-  git:
-    repo: "{{ item.1.src }}"
-    dest: "{{ default_custom }}/plugins/{{ item.1.name }}"
-  when: item.0 in local_users
-  with_nested:
-    - "{{ zsh_users }}"
-    - "{{ zsh_plugins_custom }}"
-
-- name: Template .zshrc to $HOME/ for users
-  template:
-    src: .zshrc.j2
-    dest: "{{ ansible_env.HOME }}/.zshrc"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: 0644
+- name: Download and setup Oh-My-Zsh framework for zsh_users
+  include_tasks: zsh_for_user.yml
   when: user in local_users
-  with_items:
-    - "{{ zsh_users }}"
+  loop: "{{ zsh_users }}"
   loop_control:
     loop_var: user
-
-- name: Copy dotfiles to $HOME/ for users
-  copy:
-    src: ../files/{{ item.1 }}
-    dest: "{{ ansible_env.HOME }}/{{ item.1 }}"
-    owner: "{{ item.0 }}"
-    group: "{{ item.0 }}"
-    mode: 0644
-  when: item.0 in local_users
-  with_nested:
-    - "{{ zsh_users }}"
-    - "{{ zsh_dotfiles }}"
-
-- name: Set zsh as default for zsh_users
-  become: yes
-  become_user: "{{ item }}"
-  user:
-    name: "{{ ansible_user }}"
-    shell: /bin/zsh
-  with_items: "{{ zsh_users }}"
-  when: item in local_users
 
 - name: Console setup for Debian family distributions
   include_tasks: debian_console_setup.yml

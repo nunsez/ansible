@@ -1,0 +1,43 @@
+---
+- name: Set zsh as default for {{ user }}
+  become: yes
+  user:
+    name: "{{ user }}"
+    shell: /bin/zsh
+
+- name: Download Oh-My-Zsh framework for {{ user }}
+  become: yes
+  git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: ~{{ user }}/.oh-my-zsh
+
+- name: Download zsh plugins for {{ user }}
+  become: yes
+  git:
+    repo: "{{ plugin.value.src }}"
+    dest: ~{{ user }}/.oh-my-zsh/custom/plugins/{{ plugin.key }}
+  loop: "{{ zsh_plugins_custom | dict2items }}"
+  loop_control:
+    loop_var: plugin
+    label: "{{ plugin.key }}"
+
+- name: Template .zshrc to $HOME for {{ user }}
+  become: yes
+  template:
+    src: zshrc.j2
+    dest: ~{{ user }}/.zshrc
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0644
+
+- name: Copy dotfiles to $HOME for {{ user }}
+  become: yes
+  copy:
+    src: ../files/{{ dotfile }}
+    dest: ~{{ user }}/{{ dotfile }}
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0644
+  loop: "{{ dotfiles }}"
+  loop_control:
+    loop_var: dotfile
