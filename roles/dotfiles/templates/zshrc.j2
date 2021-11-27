@@ -70,7 +70,10 @@ ZSH_THEME="{{ zsh_theme }}"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=({{ (zsh_plugins_default + zsh_plugins_custom|list) | join(" ") }})
+plugins=(
+  git globalias
+  {{ zsh_plugins_custom | list | join(" ") }}
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,5 +103,5 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias gcom="git checkout $(git_main_branch)"
-alias gcm="git commit -m"
+alias gcom='git checkout $(git_main_branch)'
+alias gcm='git commit -m'
