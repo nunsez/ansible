@@ -71,7 +71,7 @@ ZSH_THEME="{{ zsh_theme | default('robbyrussell') }}"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git globalias
+  git asdf globalias
   {{ zsh_plugins_custom | list | join(" ") }}
 )
 
