@@ -3,6 +3,10 @@ ansible_user: alex
 ansible_connection: local
 ansible_become_pass: "{{ vault_ansible_become_pass }}"
 
+create_users:
+  - name: alex
+    password: "{{ ansible_become_pass }}"
+
 zsh_users:
   - alex
 

@@ -1,0 +1,7 @@
+---
+default_shell: /bin/bash
+default_groups:
+  - sudo
+  - adm
+
+create_users: []

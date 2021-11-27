@@ -1,0 +1,10 @@
+---
+- name: Set authorized key taken from file
+  ansible.posix.authorized_key:
+    user: "{{ user }}"
+    state: present
+    key: "{{ lookup('file', '{{ ssh_key_path }}') }}"
+  loop: "{{ create_users | map(attribute='name') }}"
+  loop_control:
+    loop_var: user
+    label: "{{ user }}"

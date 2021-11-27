@@ -3,3 +3,9 @@ ansible_become_pass: "{{ vault_ansible_become_pass }}"
 
 zsh_users:
   - alex
+
+create_users:
+  - name: alex
+    password: "{{ vault_passwords.alex }}"
+  - name: kappa
+    password: "{{ vault_passwords.kappa }}"
