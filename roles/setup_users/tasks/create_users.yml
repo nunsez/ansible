@@ -3,12 +3,13 @@
   become: yes
   ansible.builtin.user:
     name: "{{ user.name }}"
-    password: "{{ user.password is defined | ternary(user.password, user.name) }}"
-    shell: "{{ user.shell is defined | ternary(user.shell, default_shell) }}"
-    groups: "{{ user.groups is defined | ternary(user.groups, default_groups) }}"
+    password: "{{ user.password | default(user.name) }}"
+    shell: "{{ user.shell | default('/bin/bash') }}"
+    groups: "{{ user.groups | default(['sudo', 'adm']) }}"
     append: yes
     state: present
   loop: "{{ create_users }}"
   loop_control:
     loop_var: user
     label: "{{ user.name }}"
+  when: create_users is defined

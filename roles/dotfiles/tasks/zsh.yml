@@ -19,10 +19,10 @@
 
 - name: Download and setup Oh-My-Zsh framework for zsh_users
   include_tasks: zsh_for_user.yml
-  when: user in local_users
   loop: "{{ zsh_users }}"
   loop_control:
     loop_var: user
+  when: (zsh_users is defined) and (user in local_users)
 
 - name: Console setup for Debian family distributions
   include_tasks: debian_console_setup.yml

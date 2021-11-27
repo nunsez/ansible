@@ -13,3 +13,7 @@ zsh_plugins_custom:
     src: https://github.com/zdharma-continuum/fast-syntax-highlighting.git
   zsh-history-substring-search:
     src: https://github.com/zsh-users/zsh-history-substring-search.git
+
+git_user_email: mad.nunsez@gmail.com
+git_user_name: Alexander Mandrikov
+git_defaultbranch: master
