@@ -12,10 +12,12 @@
   getent:
     database: passwd
     split: ":"
+  changed_when: no
 
 - name: Prepare local users
   set_fact:
     local_users: "{{ getent_passwd | list }}"
+  changed_when: no
 
 - name: Download and setup Oh-My-Zsh framework for zsh_users
   include_tasks: zsh_for_user.yml

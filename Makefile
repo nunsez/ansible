@@ -11,7 +11,7 @@ decrypt:
 	ansible-vault decrypt --vault-password-file=.password $(ARGS)
 
 test:
-	ansible-playbook test.yml -i localhost, -e ansible_connection=local --vault-password-file=.password 
+	ansible-playbook test.yml -i localhost,  --vault-password-file=.password
 
 local:
 	ansible-playbook env.yml -i inventory.ini --limit localhost --vault-password-file=.password

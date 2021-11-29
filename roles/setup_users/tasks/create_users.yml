@@ -1,7 +1,7 @@
 ---
 - name: Create users
   become: yes
-  ansible.builtin.user:
+  user:
     name: "{{ user.name }}"
     password: "{{ user.password | default(user.name) }}"
     shell: "{{ user.shell | default('/bin/bash') }}"

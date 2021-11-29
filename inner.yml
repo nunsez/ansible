@@ -1,0 +1,25 @@
+---
+- shell:
+    cmd: echo $USER
+  become: yes
+  become_user: "{{ user }}"
+  register: shell_name
+  # ignore_errors: yes
+
+# - debug:
+#     msg: "{{ user_namme }} {{ user_list }}"
+
+# - block:
+#   - shell:
+#       cmd: echo $USER
+#     become: yes
+#     become_user: "{{ user }}"
+#     register: shell_name
+
+#   - debug:
+#       msg: "{{ user_namme }} {{ user_list }}"
+
+#   rescue:
+#     - name: Rescue block (perform recovery)
+#       debug:
+#         msg: "I caught an error with {{ user }}"

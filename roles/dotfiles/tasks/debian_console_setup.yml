@@ -18,7 +18,7 @@
 - name: Edit console-setup to UTF-8
   become: yes
   lineinfile:
-    dest: /etc/default/console-setup
+    path: /etc/default/console-setup
     regexp: ^CHARMAP=
     line: CHARMAP="UTF-8"
     state: present
