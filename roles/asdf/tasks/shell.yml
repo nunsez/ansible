@@ -1,0 +1,6 @@
+---
+- import_tasks: shell/bash.yml
+  when: asdf_user_shell == "/bin/bash"
+
+- import_tasks: shell/zsh.yml
+  when: asdf_user_shell == "/bin/zsh"

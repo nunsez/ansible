@@ -1,0 +1,11 @@
+---
+asdf_dependencies: []
+
+asdf_plugins_dependencies:
+  ruby:
+    - openssl
+    - readline
+
+  nodejs:
+    - gpg
+    - gawk

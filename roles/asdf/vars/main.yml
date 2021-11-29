@@ -1,0 +1,6 @@
+---
+asdf_user: "{{ ansible_user_id }}"
+asdf_user_shell: "{{ ansible_user_shell }}"
+asdf_home: "{{ ansible_user_dir }}"
+asdf_dir: "{{ asdf_home }}/.asdf"
+asdf_git_repo: "https://github.com/asdf-vm/asdf.git"

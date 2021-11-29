@@ -1,0 +1,13 @@
+---
+- name: Install dependencies
+  become: "{{ ansible_os_family != 'Darwin' }}"
+  package:
+    update_cache: "{{ ansible_os_family != 'Darwin' }}"
+    name: "{{ asdf_dependencies }}"
+    state: latest
+
+- name: Download asdf version manager
+  git:
+    repo: "{{ asdf_git_repo }}"
+    dest: "{{ asdf_dir }}"
+    version: "{{ asdf_version }}"

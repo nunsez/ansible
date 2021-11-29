@@ -1,12 +1,19 @@
 ---
-- name: add asdf to zsh
-  include_role:
-    name: markosamuli.asdf
+- name: Load variables for the target system
+  include_vars: "{{ lookup('first_found', params) }}"
   vars:
-    asdf_init_shell: true
+    params:
+      files:
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+      paths:
+        - vars/os
+      skip: yes
 
-- name: install asdf plugins
-  include_role:
-    name: markosamuli.asdf
-  vars:
-    asdf_plugins: "{{ asdf_plugs }}"
+- import_tasks: install.yml
+
+- name: Initialize shell
+  include_tasks: shell.yml
+  when: asdf_init_shell | bool
+
+- import_tasks: plugins.yml

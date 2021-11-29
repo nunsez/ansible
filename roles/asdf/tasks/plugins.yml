@@ -1,0 +1,66 @@
+---
+- name: get all asdf plugins dependencies
+  set_fact:
+    asdf_all_plugins_dependencies: |
+      {{ asdf_plugins_dependencies | map('extract', asdf_plugins_dependencies) | flatten | unique }}
+  changed_when: no
+
+- name: Install plugins dependencies
+  become: yes
+  package:
+    update_cache: "{{ ansible_os_family != 'Darwin' }}"
+    name: "{{ asdf_all_plugins_dependencies }}"
+    state: latest
+
+- name: Install asdf plugins
+  shell:
+    cmd: |
+      . {{ asdf_dir }}/asdf.sh &&
+      asdf plugin add {{ plugin.name }} {{ plugin.repository | default }}
+    executable: "{{ asdf_user_shell }}"
+    creates: "{{ asdf_dir }}/plugins/{{ plugin.name }}"
+  loop: "{{ asdf_plugins }}"
+  loop_control:
+    loop_var: plugin
+    label: plugin.name
+  ignore_errors: yes
+
+- name: "Install asdf plugin versions"
+  shell:
+    cmd: |
+      . {{ asdf_dir }}/asdf.sh &&
+      asdf install {{ item.0.name }} {{ item.1 }}
+    executable: "{{ asdf_user_shell }}"
+    creates: "{{ asdf_dir }}/installs/{{ item.0.name }}/{{ item.1 }}"
+  loop: "{{ asdf_plugins | subelements('versions', skip_missing='yes') }}"
+  loop_control:
+    label: "{{ item.0.name }} v.{{ item.1 }}"
+
+- name: Get current asdf package versions
+  shell:
+    cmd: |
+      . {{ asdf_dir }}/asdf.sh &&
+      asdf current {{ plugin.name }} | grep -o '{{ plugin.global }}'
+    executable: "{{ asdf_user_shell }}"
+  register: asdf_plugins_versions
+  loop: "{{ asdf_plugins }}"
+  loop_control:
+    loop_var: plugin
+    label: "{{ plugin.name }}"
+  when: plugin.versions is defined
+  changed_when: no
+  failed_when: no
+
+- name: Set global asdf package versions
+  shell:
+    cmd: |
+      . {{ asdf_dir }}/asdf.sh &&
+      asdf global {{ result.plugin.name }} {{ result.plugin.global }}
+    executable: "{{ asdf_user_shell }}"
+  loop: "{{ asdf_plugins_versions.results }}"
+  loop_control:
+    loop_var: result
+    label: "{{ result.plugin.name }}"
+  when: result.skipped is not defined and result.rc != 0
+    and result.plugin.global is defined
+    and result.plugin.global != result.stdout
