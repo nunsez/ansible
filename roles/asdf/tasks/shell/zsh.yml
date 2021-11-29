@@ -10,9 +10,8 @@
 
       # initialise completions with ZSH's compinit
       autoload -Uz compinit && compinit
-  when:
-    - asdf_init_shell | bool
-    - ansible_os_family != 'Darwin'
+  when: asdf_init_shell | bool
+    and ansible_os_family != 'Darwin'
 
 - name: Add initializer for MacOS
   lineinfile:
