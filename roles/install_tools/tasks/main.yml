@@ -1,6 +1,6 @@
 ---
 - name: Install packages
-  become: "{{ ansible_distribution != 'MacOSX' }}"
+  become: "{{ ansible_os_family != 'Darwin' }}"
   package:
     update_cache: yes
     state: latest

@@ -1,5 +1,4 @@
 ---
-ansible_user: root
 ansible_become_pass: "{{ vault_root_password }}"
 
 ssh_key_path: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519.pub"

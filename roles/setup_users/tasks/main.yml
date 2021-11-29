@@ -1,9 +1,12 @@
 ---
 - import_tasks: create_users.yml
-  when: (ansible_host != "localhost") and (ansible_user_id == "root")
+  when: ansible_host != "localhost"
+    and ansible_user_id == "root"
 
 - import_tasks: auth_key.yml
-  when: (ansible_host != "localhost") and (ansible_user_id == "root")
+  when: ansible_host != "localhost"
+    and (ansible_user_id == "root"
 
 - import_tasks: password_auth.yml
-  when: (ansible_host != "localhost") and (ansible_user_id == "root")
+  when: ansible_host != "localhost"
+    and ansible_user_id == "root"
