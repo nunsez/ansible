@@ -3,11 +3,22 @@ ansible_user: alex
 ansible_become_pass: "{{ vault_ansible_become_pass }}"
 root_password: "{{ vault_root_password }}"
 
-zsh_users:
-  - alex
-
 create_users:
   - name: alex
     password: "{{ vault_passwords.alex }}"
   - name: kappa
     password: "{{ vault_passwords.kappa }}"
+
+zsh_users:
+  - alex
+
+asdf_plugins:
+  - name: ruby
+    global: 3.0.2
+    versions:
+      - 3.0.2
+
+  - name: nodejs
+    global: 17.1.0
+    versions:
+      - 17.1.0

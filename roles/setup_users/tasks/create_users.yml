@@ -3,7 +3,7 @@
   become: yes
   user:
     name: "{{ user.name }}"
-    password: "{{ user.password | default(user.name) }}"
+    password: "{{ user.password | default(user.name) | password_hash('sha512') }}"
     shell: "{{ user.shell | default(default_shell) }}"
     groups: "{{ user.groups | default(default_user_groups) }}"
     append: yes
