@@ -20,6 +20,12 @@
     value: "{{ git_defaultbranch }}"
   when: git_defaultbranch is defined
 
+- name: Set global gitignore
+  community.general.git_config:
+    name: core.excludesFile
+    scope: global
+    value: ~/.gitignore
+
 # - name: Set vim as editor
 #   community.general.git_config:
 #     name: core.editor
@@ -30,9 +36,3 @@
 #   ansible.builtin.copy:
 #     src: files/gitignore_global
 #     dest: "~/.gitignore_global"
-
-# - name: Set global gitignore
-#   community.general.git_config:
-#     name: core.excludesFile
-#     scope: global
-#     value: ~/.gitignore_global
