@@ -1,12 +1,22 @@
 ---
-- import_tasks: create_users.yml
-  when: ansible_host != "localhost"
-    and ansible_user_id == "root"
+- name: Set root password
+  set_fact:
+    ansible_become_pass: "{{ root_password }}"
+  when: ansible_user == 'root'
+  changed_when: no
 
-- import_tasks: auth_key.yml
+- name: Create users
+  include_tasks: create_users.yml
   when: ansible_host != "localhost"
-    and (ansible_user_id == "root"
 
-- import_tasks: password_auth.yml
+- name: Set auth key
+  include_tasks: auth_key.yml
   when: ansible_host != "localhost"
-    and ansible_user_id == "root"
+
+- name: Password authentication control
+  include_tasks: password_auth.yml
+  when: ansible_host != "localhost"
+
+- name: Root login control
+  include_tasks: root_login.yml
+  when: ansible_host != "localhost"

@@ -23,7 +23,7 @@ inventory:
 	ansible-inventory -i inventory.ini --vault-password-file=.password --$(ARGS)
 
 init:
-	ansible-playbook init.yml -i inventory.ini --vault-password-file=.password --limit $(scope) 
+	ansible-playbook init.yml -i inventory.ini --vault-password-file=.password --limit $(scope) -e ansible_user=$(user)
 
 
 %:

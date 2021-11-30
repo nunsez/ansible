@@ -1,0 +1,10 @@
+---
+ssh_key_name: id_ed25519.pub
+
+root_login: yes
+password_auth: no
+
+default_shell: /bin/bash
+default_user_groups:
+  - sudo
+  - adm

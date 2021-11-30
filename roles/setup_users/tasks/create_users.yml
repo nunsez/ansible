@@ -4,8 +4,8 @@
   user:
     name: "{{ user.name }}"
     password: "{{ user.password | default(user.name) }}"
-    shell: "{{ user.shell | default('/bin/bash') }}"
-    groups: "{{ user.groups | default(['sudo', 'adm']) }}"
+    shell: "{{ user.shell | default(default_shell) }}"
+    groups: "{{ user.groups | default(default_user_groups) }}"
     append: yes
     state: present
   loop: "{{ create_users }}"
