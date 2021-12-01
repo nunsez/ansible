@@ -29,15 +29,3 @@
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: 0644
-
-- name: Copy dotfiles to $HOME for {{ user }}
-  become: yes
-  copy:
-    src: ../files/{{ dotfile }}
-    dest: ~{{ user }}/{{ dotfile }}
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: 0644
-  loop: "{{ dotfiles }}"
-  loop_control:
-    loop_var: dotfile

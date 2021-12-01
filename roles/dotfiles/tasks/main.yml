@@ -1,3 +1,6 @@
 ---
+- import_tasks: prepare.yml
 - import_tasks: zsh.yml
+- import_tasks: copy.yml
 - import_tasks: git.yml
+# - import_tasks: sync.yml

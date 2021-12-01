@@ -2,6 +2,6 @@
 - name: Install packages
   become: "{{ ansible_os_family != 'Darwin' }}"
   package:
-    update_cache: yes
+    update_cache: "{{ ansible_os_family != 'Darwin' }}"
     state: latest
     name: "{{ install_packages }}"

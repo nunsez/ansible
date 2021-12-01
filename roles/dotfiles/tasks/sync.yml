@@ -1,0 +1,20 @@
+---
+- name: Install rsync
+  become: "{{ ansible_os_family != 'Darwin' }}"
+  package:
+    update_cache: "{{ ansible_os_family != 'Darwin' }}"
+    state: latest
+    name:
+      - rsync
+
+- name: Synchronize dotfiles
+  ansible.posix.synchronize:
+    src: ../sync/
+    dest: /~{{ user }}/
+    mode: "{{ sync_mode }}"
+    checksum: yes
+    recursive: yes
+  loop: "{{ zsh_users }}"
+  loop_control:
+    loop_var: user
+  when: user in local_users

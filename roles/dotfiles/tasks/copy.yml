@@ -1,0 +1,12 @@
+---
+- name: Copy dotfiles to home dir
+  become: yes
+  copy:
+    src: ../files/
+    dest: ~{{ user }}/
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0644
+  loop: "{{ dotfiles_users }}"
+  loop_control:
+    loop_var: user

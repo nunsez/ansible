@@ -1,8 +1,7 @@
 ---
-dotfiles:
-  - .zshenv
-  - .zprofile
-  - .dir_colors
+zsh_dependencies:
+  - zsh
+  - git
 
 zsh_plugins_custom:
   zsh-completions:

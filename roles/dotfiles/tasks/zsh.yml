@@ -4,27 +4,14 @@
   package:
     update_cache: "{{ ansible_distribution != 'MacOSX' }}"
     state: latest
-    name:
-      - git
-      - zsh
-
-- name: Get local users
-  getent:
-    database: passwd
-    split: ":"
-  changed_when: no
-
-- name: Prepare local users
-  set_fact:
-    local_users: "{{ getent_passwd | list }}"
-  changed_when: no
+    name: "{{ zsh_dependencies }}"
 
 - name: Download and setup Oh-My-Zsh framework for zsh_users
   include_tasks: zsh_for_user.yml
   loop: "{{ zsh_users }}"
   loop_control:
     loop_var: user
-  when: (zsh_users is defined) and (user in local_users)
+  when: user in local_users
 
 - name: Console setup for Debian family distributions
   include_tasks: debian_console_setup.yml

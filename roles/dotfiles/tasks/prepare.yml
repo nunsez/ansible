@@ -1,0 +1,11 @@
+---
+- name: Get local users
+  getent:
+    database: passwd
+    split: ":"
+  changed_when: no
+
+- name: Prepare local users
+  set_fact:
+    local_users: "{{ getent_passwd | list }}"
+  changed_when: no

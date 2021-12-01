@@ -31,8 +31,3 @@
 #     name: core.editor
 #     scope: global
 #     value: vim
-
-# - name: Copy git global ignore file
-#   ansible.builtin.copy:
-#     src: files/gitignore_global
-#     dest: "~/.gitignore_global"
