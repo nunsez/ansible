@@ -1,0 +1,23 @@
+---
+- name: Make sure sudo is installed
+  become: yes
+  package:
+    update_cache: yes
+    name: sudo
+    state: latest
+
+- name: Allow root execute any command
+  become: yes
+  lineinfile:
+    path: /etc/sudoers
+    regexp: ^root
+    line: root    ALL=(ALL:ALL) ALL
+    state: present
+
+- name: Allow sudo group members execute any command
+  become: yes
+  lineinfile:
+    path: /etc/sudoers
+    regexp: ^%sudo
+    line: '%sudo   ALL=(ALL:ALL) ALL'
+    state: present
