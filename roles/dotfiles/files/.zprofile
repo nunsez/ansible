@@ -9,3 +9,11 @@ zle -N my-accept-line
 
 # rebind Enter, usually this is `^M'
 bindkey '^M' my-accept-line
+
+reload() {
+  source "${HOME}/.zshrc"
+}
+
+zedit() {
+  ${EDITOR:-vim} "${HOME}/.zshrc"
+}

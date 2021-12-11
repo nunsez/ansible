@@ -14,7 +14,7 @@ test:
 	ansible-playbook test.yml -i localhost,  --vault-password-file=.password
 
 local:
-	ansible-playbook env.yml -i inventory.ini --limit localhost --vault-password-file=.password -e ansible_user=$(user)
+	ansible-playbook env.yml -i inventory.ini --limit localhost --vault-password-file=.password
 
 servers:
 	ansible-playbook env.yml -i inventory.ini --vault-password-file=.password --limit servers -e ansible_user=$(user)

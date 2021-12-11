@@ -7,6 +7,9 @@ create_users:
   - name: alex
     password: "{{ ansible_become_pass }}"
 
+zsh_users:
+  - "{{ ansible_user_id }}"
+
 asdf_plugins:
   - name: ruby
     global: 3.0.2

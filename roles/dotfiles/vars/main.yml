@@ -8,6 +8,8 @@ zsh_plugins_custom:
     src: https://github.com/zsh-users/zsh-completions.git
   zsh-autosuggestions:
     src: https://github.com/zsh-users/zsh-autosuggestions.git
+  # alias-tips:
+  #   src: https://github.com/djui/alias-tips.git
   fast-syntax-highlighting:
     src: https://github.com/zdharma-continuum/fast-syntax-highlighting.git
   zsh-history-substring-search:
